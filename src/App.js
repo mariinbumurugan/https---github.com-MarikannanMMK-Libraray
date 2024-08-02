@@ -1,20 +1,26 @@
 import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import LoginPage from "./pages/Login";
-import Dashboard from "./components/Dashboard";
+import Dashboard from "./pages/Dashboard";
+import Books from "./pages/Books";
+
+import Navbar from "./components/Navbar";
+import ShowNavbar from "./components/ShowNavbar";
 
 function App() {
   return (
-    <div className="min-h-full h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
-        <BrowserRouter>
-          <Routes>
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/successlogin" element={<Dashboard />} />
-          </Routes>
-        </BrowserRouter>
-      </div>
-    </div>
+    <>
+      <BrowserRouter>
+        <ShowNavbar>
+          <Navbar />
+        </ShowNavbar>
+        <Routes>
+          <Route exact path="/login" element={<LoginPage />} />
+          <Route exact path="/successlogin" element={<Dashboard />} />
+          <Route exact path="/books" element={<Books />} />
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 

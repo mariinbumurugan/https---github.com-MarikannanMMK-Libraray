@@ -26,7 +26,6 @@ export default function Login() {
   };
 
   const authenticatorAPI = async () => {
-    console.log(loginState);
     try {
       const response = await axios.post(
         "http://localhost:8080/login",
@@ -37,7 +36,9 @@ export default function Login() {
           },
         }
       );
-      const token = response.data;
+
+      const token = response.data.accessToken;
+      const refreshToken = response.data.refreshToken;
       console.log(response);
       localStorage.setItem("token", token);
       const decoded = jwtDecode(token);
@@ -45,7 +46,7 @@ export default function Login() {
       console.log(decoded.role)
       localStorage.setItem('UserRole',decoded.role);
       localStorage.setItem('Username',decoded.sub)
-      //localStorage.setItem('refreshToken', refreshToken);
+      localStorage.setItem('refreshToken', refreshToken);
       navigate("/successlogin");
     } catch (error) {
       setError("Inavalid Username or Password !!");
